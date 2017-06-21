@@ -1,0 +1,37 @@
+{
+  "name": "jquery-singleclick",
+  "description": "Tell a singleclick from a doubleclick",
+  "homepage": "https://github.com/omriyariv/jquery-singleclick",
+  "version": "1.0.1",
+  "main": "jquery.singleclick.js",
+  "keywords": [
+    "jquery-plugin",
+    "jquery",
+    "plugins",
+    "singleclick"
+  ],
+  "license": "MIT",
+  "author": {
+    "name": "Omri Yariv",
+    "email": "omriyariv@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/omriyariv/jquery-singleclick/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/omriyariv/jquery-singleclick.git"
+  },
+  "github": "https://github.com/omriyariv/jquery-singleclick",
+  "peerDependencies": {
+    "jquery": ">=1.7.0"
+  },
+  "devDependencies": {
+    "jquery": ">=1.7.0",
+    "jscs": "^3.0.5",
+    "jshint": "^2.9.2"
+  },
+  "scripts": {
+    "lint": "jscs . && jshint ."
+  }
+}

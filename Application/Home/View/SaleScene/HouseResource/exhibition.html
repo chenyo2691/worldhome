@@ -1,0 +1,76 @@
+<layout name="MainLayout"/>
+
+<!--baguetteBox-->
+<link rel="stylesheet" href="__PUBLIC__/lib/addons/baguetteBox/css/baguetteBox.min.css">
+<link rel="stylesheet" href="__PUBLIC__/lib/addons/baguetteBox/css/thumbnail-gallery.css">
+<script type="text/javascript" src="__PUBLIC__/lib/addons/baguetteBox/js/baguetteBox.min.js"></script>
+
+<a class="btn btn-box-tool" href="javascript:void(0)" onclick="history.back();"><i class="fa fa-arrow-left"></i>返回</a>
+<label class="label label-success pull-right">房源编号: {$info.housecode}</label>
+<legend></legend>
+
+<!--<div class="jumbotron">-->
+<div class="container">
+    <div class="row">
+        <h2 style="text-align: center">{$info.title}</h2>
+        <legend></legend>
+        <h4>{$info.description}</h4>
+        <legend></legend>
+    </div>
+</div>
+<!--</div>-->
+
+<div class="container">
+    <div class="col-md-3"><label>区县: {$info.location}</label></div>
+    <div class="col-md-3"><label>楼盘: {$info.building}</label></div>
+    <div class="col-md-3"><label>房型: {$info.layout}</label></div>
+    <div class="col-md-3"><label>装修情况: {$info.decoration}</label></div>
+    <div class="col-md-3"><label>楼层: {$info.floor}</label></div>
+    <div class="col-md-3"><label>方向: {$info.direction}</label></div>
+    <div class="col-md-3"><label>面积: {$info.area}</label></div>
+    <div class="col-md-3"><label>房号: {$info.roomnumber}</label></div>
+    <div class="col-md-3"><label>钥匙: {$info.haskey}</label></div>
+    <div class="col-md-3"><label>房产证是否超2年: {$info.twoyears}</label></div>
+    <div class="col-md-3"><label>放盘: {$info.price}</label></div>
+    <legend></legend>
+    <div class="col-md-3"><label>联系人: {$info.contact}</label></div>
+    <div class="col-md-3"><label>性别: {$info.sex}</label></div>
+    <div class="col-md-3"><label>电话: {$info.phone}</label></div>
+</div>
+<legend></legend>
+
+<div class="tz-gallery">
+    <div class="row" id="galleryContainer">
+
+    </div>
+</div>
+
+<script>
+    $(function () {
+        zeroModal.loading(2);
+        $.post("__URL__/getImgByHouseId", {id: "{$info.id}"}, function (result) {
+            zeroModal.closeAll();
+            if (result) {
+                $.each(result, function (index, domEle) {
+                    var str = getImgHtml(domEle);
+                    $("#galleryContainer").append(str);
+                });
+                baguetteBox.run('.tz-gallery', {
+//                    animation: 'fadeIn',
+                });
+            }
+        });
+    });
+
+    function getImgHtml(data) {
+        var uqId = "img_" + data.id;
+        var str = "";
+        str += "<div class='col-sm-6 col-md-3' id='" + uqId + "'>";
+        str += "<div class='thumbnail'>";
+        str += "<a class='lightbox' href='__ROOT__" + data.url + "'>";
+        str += "<img src='__ROOT__" + data.url + "' alt='" + data.title + "'>";
+        str += "</a>";
+        str += "</div></div>";
+        return str;
+    }
+</script>

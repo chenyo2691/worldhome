@@ -1,0 +1,26 @@
+<aside class="main-sidebar">
+    <section class="sidebar">
+        <ul class="sidebar-menu">
+            <li class="header">主导航</li>
+            <volist name="MENU" id="fm">
+                <li class="treeview <eq name='fm.active' value='true'>active</eq>">
+                    <a href="{$fm['url']}">
+                        <i class="{$fm['icon']}"></i> <span>{$fm['title']}</span>
+                        <if condition="count($fm['children']) gt 0">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </if>
+                    </a>
+                    <if condition="count($fm['children']) gt 0">
+                        <ul class="treeview-menu">
+                            <volist name="fm['children']" id="sm">
+                                <li class="<eq name='sm.active' value='true'>active</eq>">
+                                    <a href="{$sm['url']}"><i class="{$sm['icon']}"></i> {$sm.title}</a>
+                                </li>
+                            </volist>
+                        </ul>
+                    </if>
+                </li>
+            </volist>
+        </ul>
+    </section>
+</aside>

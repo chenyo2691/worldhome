@@ -1,0 +1,147 @@
+<layout name="MainLayout"/>
+
+<style>
+    .table > tbody > tr > td {
+        /*text-align: center;*/
+        vertical-align: middle;
+        white-space: nowrap;
+        max-width: 12em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .table > thead > tr > th {
+        text-align: center;
+        vertical-align: middle;
+        white-space: nowrap;
+        max-width: 12em;
+        overflow: hidden;
+    }
+
+    #tooltip {
+        position: absolute;
+        /*width: 200px;*/
+        max-width: 400px;
+        /*height: 50px;*/
+        line-height: 30px;
+        border: 1px solid #ccc;
+        padding: 5px;
+        /*text-align: center;*/
+        box-shadow: 1px 1px 2px #ccc;
+        background: #fff;
+        border-radius: 5px;
+    }
+</style>
+
+<div class="box box-solid box-success">
+    <div class="box-header">
+        <span class="box-title">房源管理</span>
+    </div>
+    <div class="box-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div id="toolbar">
+                    <button type="button" class="btn btn-default" onclick="showAddModal()">
+                        <i class="fa fa-plus-square-o">新增</i>
+                    </button>
+                </div>
+                <table id="table" data-search="true" data-pagination="true" data-show-toggle="false"></table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="AddModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">房源添加</h4>
+            </div>
+            <div class="modal-body">
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary">提交更改</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(function () {
+        initTable();
+        initTooltip();
+        updateTable();
+    });
+
+    function initTable() {
+        var columns = [];
+        columns.push({title: "序号", field: "id", sortable: "true", visible: false, align: "center"});
+//        columns.push({title: "标题", field: "title", sortable: "true", align: "center",});
+        columns.push({title: "区县", field: "location", sortable: "true", align: "center"});
+        columns.push({title: "楼盘", field: "building", sortable: "true", align: "center"});
+        columns.push({title: "房型", field: "layout", sortable: "true", align: "center"});
+        columns.push({title: "楼层", field: "floor", sortable: "true", align: "center"});
+        columns.push({title: "方向", field: "direction", sortable: "true", align: "center"});
+        columns.push({title: "面积", field: "area", sortable: "true", align: "center"});
+        columns.push({title: "装修情况", field: "decoration", sortable: "true", align: "center"});
+        columns.push({title: "价钱", field: "price", sortable: "true", align: "center"});
+        columns.push({title: "电话", field: "phone", sortable: "true", align: "center"});
+        columns.push({
+            title: "操作", align: "center",
+            formatter: function (value, row) {
+                var str = "";
+                str += "<a href='__URL__/exhibition?houseid=" + row.id + "'>详情</a> | ";
+                str += "<a href='#'>更新</a> | ";
+                str += "<a href='#'>跟进</a>";
+//                var url = "{:U('Home/Management/ShowEstimate')}" + "?id=" + row.id;
+                return str;
+            }
+        });
+//        $('#table').bootstrapTable({columns: columns, data: data, toolbar: "#toolbar"});
+        $('#table').bootstrapTable({columns: columns, toolbar: "#toolbar"});
+    }
+
+    function initTooltip() {
+        $('#table tbody').on('mouseover', 'td:not(:last-child)', function (e, params) {
+            var $td = $(e.target).closest('td');
+            var content = $td[0].innerText;
+            var tooltip = "<div id='tooltip'>" + content + "</div>";
+            $("body").append(tooltip);
+            var x = 10, y = 20;
+            $("#tooltip").css({
+                "top": (e.pageY + y) + "px",//e.pageX相对与文档，e.clientX相对于可视区
+                "left": (e.pageX + x) + "px",
+            }).show("fast");
+        }).on('mouseout', 'td', function (e, params) {
+            $("#tooltip").remove();
+        }).on('mousemove', 'td', function (e, params) {
+            var x = 10, y = 20;
+            $("#tooltip").css({
+                "left": (e.pageX + x) + "px",
+                "top": (e.pageY + y) + "px",
+            });
+        });
+    }
+
+    function updateTable() {
+        zeroModal.loading(2);
+        $.post("__URL__/updateTable", {}, function (data) {
+            if (data.length > 0) {
+                $("#table").bootstrapTable("load", data);
+            } else {
+                $('#table').bootstrapTable("removeAll");
+            }
+            zeroModal.closeAll();
+        });
+    }
+
+    function showAddModal() {
+        window.parent.location.href = "{:u('Home/SaleScene/HouseResource/add')}";
+    }
+
+</script>

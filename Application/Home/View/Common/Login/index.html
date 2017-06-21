@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title> 登录 | 世居地产ERP </title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="__PUBLIC__/lib/addons/bootstrap-3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/lib/lte/dist/css/font-awesome.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/lib/lte/dist/css/ionicons.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/lib/lte/dist/css/AdminLTE.min.css">
+    <!-- iCheck -->
+    <!--<link rel="stylesheet" href="__PUBLIC__/plugins/iCheck/square/blue.css">-->
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="__PUBLIC__/lib/lte/dist/js/html5shiv.min.js"></script>
+    <script src="__PUBLIC__/lib/lte/dist/js/respond.min.js"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" href="__PUBLIC__/Common/completer/completer.css">
+
+    <link rel="stylesheet" href="__PUBLIC__/lib/addons/wave/dist/css/txt.wav.css">
+
+    <style>
+        .login-box-body {
+            -moz-box-shadow: 0px 3px 25px #5E1111;
+            -webkit-box-shadow: 0px 3px 25px #5E1111;
+            box-shadow: 0px 3px 25px #5E1111;
+            border-radius: 27px;
+        }
+    </style>
+</head>
+<body class="hold-transition login-page" style="background-image: linear-gradient(0deg, #262727, #00B3AA);">
+<div class="login-box">
+    <div class="login-logo txtwav slow" style="font-family: 'Microsoft YaHei', sans-serif">
+        <b>世居地产管理平台</b>
+    </div><!-- /.login-logo -->
+    <div class="login-box-body">
+        <p class="login-box-msg txtwav flip" style="font-family: 'Microsoft YaHei', sans-serif">欢迎使用!</p>
+        <form action="{:U('/Home/Common/Login/login')}" method="post">
+            <div class="form-group has-feedback">
+                <input autofocus type="text" name="email" class="form-control"
+                       placeholder="邮箱">
+                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input name="password" type="password" class="form-control" placeholder="密码">
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <button type="submit" class="btn btn-primary btn-block btn-flat" style="border-radius:18px;">登录
+                    </button>
+                </div>
+                <div style="height:50px; display:block"></div>
+                <div class="col-xs-12">
+                    <a href="__URL__/register" class="btn btn-default btn-block btn-flat" style="border-radius:18px;">注册
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="__PUBLIC__/lib/lte/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+<script src="__PUBLIC__/lib/addons/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="__PUBLIC__/lib/addons/wave/dist/js/txt.wav.min.js"></script>
+
+<script type="text/javascript">
+
+</script>
+</body>
+</html>

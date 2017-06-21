@@ -1,0 +1,10 @@
+/Application/Runtime/
+!/Application/Runtime/leavemealone.md
+nbproject
+.idea
+/Data/Header/crop
+/Data/Header/temp
+/Data/House
+!/Data/Header/crop/leavemealone.md
+!/Data/Header/temp/leavemealone.md
+!/Data/House/leavemealone.md

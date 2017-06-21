@@ -1,0 +1,492 @@
+<layout name="MainLayout"/>
+
+<script src="__PUBLIC__/lib/common/js/common.js"></script>
+
+<!--bootstrap-switch-->
+<script src="__PUBLIC__/lib/addons/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+<link rel="stylesheet" href="__PUBLIC__/lib/addons/bootstrap-switch/css/bootstrap-switch.min.css">
+
+<!--zyupload-->
+<link rel="stylesheet" href="__PUBLIC__/lib/addons/zyupload/zyupload-1.0.0.min.css" type="text/css">
+<script type="text/javascript" src="__PUBLIC__/lib/addons/zyupload/zyupload-1.0.0.min.js"></script>
+
+<!--baguetteBox-->
+<link rel="stylesheet" href="__PUBLIC__/lib/addons/baguetteBox/css/baguetteBox.min.css">
+<link rel="stylesheet" href="__PUBLIC__/lib/addons/baguetteBox/css/thumbnail-gallery.css">
+<script type="text/javascript" src="__PUBLIC__/lib/addons/baguetteBox/js/baguetteBox.min.js"></script>
+
+<style>
+    .select2-container--default .select2-selection--multiple .select2-selection__choice {
+        background-color: #367fa9;
+    }
+
+    .upload_preview {
+        overflow: inherit;
+    }
+</style>
+
+<div class="box box-solid box-success">
+    <div class="box-header">
+        <span class="box-title" id="box_title">-</span>
+        <div class="box-tools pull-right">
+            <a class="btn btn-box-tool" href="javascript:void(0)" onclick="history.back();"><i
+                    class="fa fa-arrow-left"></i>返回</a>
+        </div>
+    </div>
+    <div class="box-body">
+        <div class="toolbar">
+            <div class="col-md-12">
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-primary" onclick="saveHouse()">
+                        <i class="fa fa-floppy-o"> 保存</i>
+                    </button>
+                    <button type="button" class="btn btn-default" onclick="history.back()">
+                        <i class="fa fa-step-backward"> 返回</i>
+                    </button>
+                </div>
+                <legend></legend>
+            </div>
+        </div>
+        <!--ID-->
+        <div class="col-md-12" style="display: none">
+            <div class="form-group form-group-sm">
+                <label class="text-red">* 序号</label>
+                <input id="id" class="form-control" placeholder="序号" disabled>
+            </div>
+        </div>
+        <!--标题-->
+        <div class="form-horizontal col-sm-12">
+            <div class="form-group form-group-sm">
+                <label class="col-sm-1 control-label text-red">标题</label>
+                <div class="col-sm-11">
+                    <input id="title" type="text" class="form-control" placeholder="标题">
+                </div>
+            </div>
+        </div>
+        <!--描述-->
+        <div class="form-horizontal col-sm-12">
+            <div class="form-group form-group-sm">
+                <label class="col-sm-1 control-label">描述</label>
+                <div class="col-sm-11">
+                    <textarea id="description" class="form-control" rows="3"></textarea>
+                </div>
+            </div>
+        </div>
+        <!--编号-->
+        <div class="form-horizontal col-sm-4">
+            <div class="form-group form-group-sm">
+                <label class="col-sm-2 control-label text-red">编号</label>
+                <div class="col-sm-10">
+                    <input id="housecode" type="text" class="form-control" placeholder="编号" disabled>
+                </div>
+            </div>
+        </div>
+
+        <!--类型-->
+        <div class="form-horizontal col-sm-4">
+            <div class="form-group form-group-sm">
+                <label class="col-sm-2 control-label">类型</label>
+                <div class="col-sm-10">
+                    <select id="decoration" class="form-control">
+                        <option value=""></option>
+                        <option value="带装修">带装修</option>
+                        <option value="毛坯">毛坯</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <!--区县-->
+        <div class="form-horizontal col-sm-4">
+            <div class="form-group form-group-sm">
+                <label class="col-sm-2 control-label text-red">区县</label>
+                <div class="col-sm-10">
+                    <input id="location" class="form-control" placeholder="区县">
+                </div>
+            </div>
+        </div>
+        <!--楼盘-->
+        <div class="form-horizontal col-sm-4">
+            <div class="form-group form-group-sm">
+                <label class="col-sm-2 control-label text-red">楼盘</label>
+                <div class="col-sm-10">
+                    <input id="building" class="form-control" placeholder="楼盘">
+                </div>
+            </div>
+        </div>
+        <!--房型-->
+        <div class="form-horizontal col-sm-4">
+            <div class="form-group form-group-sm">
+                <label class="col-sm-2 control-label">房型</label>
+                <div class="col-sm-10">
+                    <input id="layout" class="form-control" placeholder="房型">
+                </div>
+            </div>
+        </div>
+        <!--楼层-->
+        <div class="form-horizontal col-sm-4">
+            <div class="form-group form-group-sm">
+                <label class="col-sm-2 control-label">楼层</label>
+                <div class="col-sm-10">
+                    <input id="floor" class="form-control" placeholder="楼层">
+                </div>
+            </div>
+        </div>
+        <!--面积-->
+        <div class="form-horizontal col-sm-4">
+            <div class="form-group form-group-sm">
+                <label class="col-sm-2 control-label">面积</label>
+                <div class="col-sm-10">
+                    <div class="input-group">
+                        <input id="area" type="number" class="form-control" placeholder="面积">
+                        <span class="input-group-addon">平方</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--方向-->
+        <div class="form-horizontal col-sm-4">
+            <div class="form-group form-group-sm">
+                <label class="col-sm-2 control-label">方向</label>
+                <div class="col-sm-10">
+                    <input id="direction" class="form-control" placeholder="方向">
+                </div>
+            </div>
+        </div>
+        <!--价格-->
+        <div class="form-horizontal col-sm-4">
+            <div class="form-group form-group-sm">
+                <label class="col-sm-2 control-label">放盘</label>
+                <div class="col-sm-10">
+                    <div class="input-group">
+                        <input id="price" type="number" min="0" step="50" class="form-control"
+                               placeholder="价格">
+                        <span class="input-group-addon">万元</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--房号-->
+        <div class="form-horizontal col-sm-4">
+            <div class="form-group form-group-sm">
+                <label class="col-sm-2 control-label">房号</label>
+                <div class="col-sm-10">
+                    <input id="roomnumber" class="form-control" placeholder="电话">
+                </div>
+            </div>
+        </div>
+        <!--钥匙-->
+        <div class="form-horizontal col-sm-4">
+            <div class="form-group form-group-sm">
+                <label class="col-sm-2 control-label">钥匙</label>
+                <div class="col-sm-10">
+                    <select id="haskey" class="form-control">
+                        <option value=""></option>
+                        <option value="有">有</option>
+                        <option value="无">无</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <!--房产证是否够两年-->
+        <div class="form-horizontal col-sm-4">
+            <div class="form-group form-group-sm">
+                <label class="col-sm-2 control-label">是否够两年</label>
+                <div class="col-sm-10">
+                    <select id="twoyears" class="form-control">
+                        <option value=""></option>
+                        <option value="是">是</option>
+                        <option value="否">否</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <legend></legend>
+
+        <!--联系人-->
+        <div class="form-horizontal col-sm-4">
+            <div class="form-group form-group-sm">
+                <label class="col-sm-2 control-label">联系</label>
+                <div class="col-sm-10">
+                    <input id="contact" class="form-control" placeholder="联系人">
+                </div>
+            </div>
+        </div>
+        <!--性别-->
+        <div class="form-horizontal col-sm-4">
+            <div class="form-group form-group-sm">
+                <label class="col-sm-2 control-label">性别</label>
+                <div class="col-sm-10">
+                    <select id="sex" class="form-control">
+                        <option value=""></option>
+                        <option value="男">男</option>
+                        <option value="女">女</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <!--电话-->
+        <div class="form-horizontal col-sm-4">
+            <div class="form-group form-group-sm">
+                <label class="col-sm-2 control-label">电话</label>
+                <div class="col-sm-10">
+                    <input id="phone" class="form-control" placeholder="电话">
+                </div>
+            </div>
+        </div>
+
+        <legend></legend>
+
+        <div class="col-md-12">
+            <div class="tz-gallery">
+                <div class="row" id="galleryContainer">
+
+                </div>
+            </div>
+        </div>
+
+        <!--图片-->
+        <div class="col-md-12">
+            <label control-label>房图上传（支持jpg、png格式文件）</label>
+            <div id="zyupload" class="zyupload"></div>
+        </div>
+
+        <!--<div class="uploadInf"></div>-->
+
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    var url = "";
+    var action = "";//获取当前页面作用[add|edit]
+
+    //region 用于兼容旧版jquery
+    jQuery.browser = {};
+    (function () {
+        jQuery.browser.msie = false;
+        jQuery.browser.version = 0;
+        if (navigator.userAgent.match(/MSIE ([0-9]+)./)) {
+            jQuery.browser.msie = true;
+            jQuery.browser.version = RegExp.$1;
+        }
+    })();
+    //endregion
+
+    $(function () {
+        getTempData();
+        zyUploadInit();
+        init();
+    });
+
+    function getTempData() {
+        zeroModal.loading(2);
+        $.post("__URL__/isTempDataExist", {}, function (result) {
+            zeroModal.closeAll();
+            if (result.status == "1") {
+                swal({
+                        title: "存在未保存房源记录",
+                        text: "是否继续编辑？",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "是，继续编辑",
+                        cancelButtonText: "不",
+                        closeOnConfirm: false,
+                        closeOnCancel: false
+                    },
+                    function (isConfirm) {
+                        if (isConfirm) {
+                            $.each(result["data"], function (index, domEle) {
+//                                console.log(index + ":" + domEle);
+                                $("#" + index).val(domEle);
+                            });
+                            $.each(result["imgData"], function (index, domEle) {
+//                                console.log(index + ":" + domEle);
+                                var str = getImgHtml(domEle);
+                                $("#galleryContainer").append(str);
+                            });
+                            baguetteBox.run('.tz-gallery');
+                        } else {
+                            zeroModal.loading(2);
+                            $.post("__URL__/newTempData", {"tempid": result.data.id}, function (data) {
+                                $.each(data, function (index, domEle) {
+                                    console.log(index + ":" + domEle);
+                                    $("#" + index).val(domEle);
+                                });
+                                zeroModal.closeAll();
+                            });
+                        }
+                        swal.close();
+                    });
+            } else {
+                //无
+                zeroModal.loading(2);
+                $.post("__URL__/newTempData", {}, function (data) {
+                    $.each(data, function (index, domEle) {
+                        $("#" + index).val(domEle);
+                    });
+                    zeroModal.closeAll();
+                });
+            }
+        });
+    }
+
+    function init() {
+        //region action
+        action = "{$action}";
+        if (action == "add") {
+            url = "__URL__/addAction";
+            $("#box_title").html("房源新增");
+        } else if (action == "edit") {
+            url = "__URL__/editAction";
+            $("#box_title").html("房源编辑");
+        }
+        //endregion
+    }
+
+    function zyUploadInit() {
+        // 初始化插件
+        $("#zyupload").zyUpload({
+            width: "100%",                 // 宽度
+            height: "400px",                 // 高度
+            itemWidth: "140px",                 // 文件项的宽度
+            itemHeight: "115px",                 // 文件项的高度
+            url: "__URL__/upload",              // 上传文件的路径
+            fileType: ["jpg", "png","JPG", "PNG"],// 上传文件的类型
+            fileSize: 51200000,                // 上传文件的大小
+            multiple: true,                    // 是否可以多个文件上传
+            dragDrop: true,                    // 是否可以拖动上传文件
+            tailor: false,                    // 是否可以裁剪图片
+            del: true,                    // 是否可以删除文件
+            finishDel: false,  				  // 是否在上传文件完成后删除预览
+            /* 外部获得的回调接口 */
+            onSelect: function (selectFiles, allFiles) {    // 选择文件的回调方法  selectFile:当前选中的文件  allFiles:还没上传的全部文件
+//                console.info("当前选择了以下文件：");
+//                console.info(selectFiles);
+            },
+            onDelete: function (file, files) {              // 删除一个文件的回调方法 file:当前删除的文件  files:删除之后的文件
+//                console.info("当前删除了此文件：");
+//                console.info(file.name);
+//                toastr.info("当前删除了此文件：" + file.name);
+            },
+            onSuccess: function (file, response) {          // 文件上传成功的回调方法
+                var result = JSON.parse(response);
+                if (result["status"] == "1") {
+                    toastr.success(file["name"], '上传成功');
+                    var str = getImgHtml(result.data);
+                    $("#galleryContainer").append(str);
+                    baguetteBox.run('.tz-gallery');
+                } else {
+                    toastr.error(result["msg"], '上传失败!');
+                }
+//                console.log(file);
+//                console.log(response);
+//                console.info("此文件上传成功：");
+//                console.info(file.name);
+//                console.info("此文件上传到服务器地址：");
+//                console.info(response);
+//                $("#uploadInf").append("<p>上传成功，文件地址是：" + response + "</p>");
+            },
+            onFailure: function (file, response) {          // 文件上传失败的回调方法
+                toastr.success("此文件上传失败：" + file.name);
+//                console.info();
+//                console.info(file.name);
+            },
+            onComplete: function (response) {           	  // 上传完成的回调方法
+                toastr.success("文件上传完成")
+//                console.info("文件上传完成");
+//                console.info(response);
+            }
+        });
+    }
+
+    function getImgHtml(data) {
+        var uqId = "img_" + data.id;
+        var str = "";
+        str += "<div class='col-sm-6 col-md-2' id='" + uqId + "'>";
+        str += "<div class='thumbnail'>";
+        str += "<a class='lightbox' href='__ROOT__" + data.url + "'>";
+        str += "<img src='__ROOT__" + data.url + "' alt='" + data.title + "'>";
+        str += "</a>";
+        str += "<div class='caption'>";
+        str += "<button class='btn btn-danger btn-xs' onclick='deleteImg(" + data.id + ")'>删除</button>";
+        str += "</div></div></div>";
+        return str;
+    }
+
+    function deleteImg(imgid) {
+        swal({
+                title: "删除图片",
+                text: "是否确定删除？",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "是",
+                cancelButtonText: "不",
+                closeOnConfirm: false,
+                closeOnCancel: false
+            },
+            function (isConfirm) {
+                if (isConfirm) {
+                    $.post("__URL__/DeleteImg", {id: imgid}, function (result) {
+                        zeroModal.closeAll();
+                        if (result.status == "1") {
+                            var uqId = "img_" + result["deleteid"];
+                            $("#" + uqId).remove();
+                            baguetteBox.run('.tz-gallery');
+                            toastr.success('删除成功!');
+                        } else {
+                            toastr.success('删除失败!');
+                        }
+                    });
+                }
+                swal.close();
+            });
+    }
+
+    /**
+     * 添加|保存
+     */
+    function saveHouse() {
+        var saveData = {
+            id: $("#id").val(),
+            title: $("#title").val(),
+            location: $("#location").val(),
+            building: $("#building").val(),
+            layout: $("#layout").val(),
+            floor: $("#floor").val(),
+            direction: $("#direction").val(),
+            area: $("#area").val(),
+            decoration: $("#decoration").val(),
+            roomnumber: $("#roomnumber").val(),
+            haskey: $("#haskey").val(),
+            twoyears: $("#twoyears").val(),
+            price: $("#price").val(),
+            contact: $("#contact").val(),
+            sex: $("#sex").val(),
+            phone: $("#phone").val(),
+            description: $("#description").val(),
+//            status: $("status").val(),
+        }
+
+        zeroModal.loading(2);
+        $.post(url, {data: saveData}, function (result) {
+            zeroModal.closeAll();
+            if (result.status == "1") {
+                swal({
+                    title: "保存成功",
+                    text: "将自动跳转到房源列表",
+                    timer: 1000,
+                    showConfirmButton: false
+                }, function () {
+//                        window.location.reload();
+                    window.location.href = "{:U('Home/SaleScene/HouseResource/index')}";
+                });
+            } else {
+                zeroModal.alert("保存失败，请稍后再试");
+            }
+        });
+    }
+
+
+</script>

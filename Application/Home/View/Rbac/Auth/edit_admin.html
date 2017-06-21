@@ -1,0 +1,92 @@
+<layout name="MainLayout"/>
+
+<link rel="stylesheet" href="__PUBLIC__/lib/lte/plugins/iCheck/all.css">
+
+<div class="box box-solid box-success">
+    <div class="box-header">
+        <span class="box-title">修改管理员</span>
+        <div class="box-tools pull-right">
+            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+        </div>
+    </div>
+    <div class="box-body">
+        <ul id="myTab" class="nav nav-tabs">
+            <li>
+                <a href="{:U('Home/Rbac/Auth/admin_user_list')}">管理员列表</a>
+            </li>
+            <li class="active">
+                <a href="{:U('Home/Rbac/Auth/add_admin')}">修改管理员</a>
+            </li>
+        </ul>
+        <form class="form-inline" method="post">
+            <input type="hidden" name="id" value="{$user_data['id']}">
+            <table class="table table-striped table-bordered table-hover table-condensed">
+                <tr>
+                    <th>管理组</th>
+                    <td>
+                        <foreach name="data" item="v">
+                            <label>
+                                {$v['title']}
+                                <input class="xb-icheck" type="checkbox" name="group_ids[]" value="{$v['id']}"
+                                <in name="v['id']" value="$group_data"> checked="checked"</in>
+                                >
+                            </label>
+                            &emsp;
+                        </foreach>
+                    </td>
+                </tr>
+                <tr>
+                    <th>邮箱(账号登录名)</th>
+                    <td>
+                        <input class="form-control" type="text" name="email" value="{$user_data['email']}"
+                               readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <th>姓名</th>
+                    <td>
+                        <input class="form-control" type="text" name="name" value="{$user_data['name']}">
+                    </td>
+                </tr>
+                <tr>
+                    <th>初始密码</th>
+                    <td>
+                        <input class="form-control" type="text" name="password">如不改密码；留空即可
+                    </td>
+                </tr>
+                <tr>
+                    <th>状态{$user_data['status']}</th>
+                    <td>
+                        <span class="inputword">允许登录</span>
+                        <input class="xb-icheck" type="radio" name="status" value="1"
+                        <eq name="user_data['status']" value="1"> checked="checked"</eq>
+                        >
+                        &emsp;
+                        <span class="inputword">禁止登录</span>
+                        <input class="xb-icheck" type="radio" name="status" value="2"
+                        <eq name="user_data['status']" value="2"> checked="checked"</eq>
+                        >
+                    </td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td>
+                        <input class="btn btn-success" type="submit" value="修改">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+
+<script src="__PUBLIC__/lib/lte/plugins/iCheck/icheck.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('.xb-icheck').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: "iradio_square-green",
+            increaseArea: '20%'
+        });
+    });
+</script>

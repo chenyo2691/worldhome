@@ -1,0 +1,1078 @@
+<layout name="MainLayout"/>
+
+<script src="__PUBLIC__/lib/common/js/common.js"></script>
+
+<script src="__PUBLIC__/lib/addons/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+<link rel="stylesheet" href="__PUBLIC__/lib/addons/bootstrap-switch/css/bootstrap-switch.min.css">
+
+<style>
+    .select2-container--default .select2-selection--multiple .select2-selection__choice {
+        background-color: #367fa9;
+    }
+</style>
+
+<div class="box box-solid box-success">
+    <div class="box-header">
+        <span class="box-title" id="box_title">-</span>
+        <div class="box-tools pull-right">
+            <a class="btn btn-box-tool" href="javascript:void(0)" onclick="history.back();"><i
+                    class="fa fa-arrow-left"></i>返回</a>
+        </div>
+    </div>
+    <div class="box-body">
+        <div class="toolbar">
+            <div class="col-md-12">
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-primary" onclick="saveCustomer()">
+                        <i class="fa fa-floppy-o"> 保存</i>
+                    </button>
+                    <button type="button" class="btn btn-default" onclick="history.back()">
+                        <i class="fa fa-step-backward"> 返回</i>
+                    </button>
+                </div>
+                <legend></legend>
+            </div>
+        </div>
+        <!--ID-->
+        <div class="col-md-12" style="display: none">
+            <div class="form-group form-group-sm">
+                <label class="text-red">* 序号</label>
+                <input id="id" class="form-control" placeholder="序号" disabled>
+            </div>
+        </div>
+        <!--项目名称-->
+        <div class="form-horizontal col-sm-4">
+            <div class="form-group form-group-sm">
+                <label class="col-sm-2 control-label text-red">项目名称</label>
+                <div class="col-sm-10">
+                    <select id="project" class="form-control" placeholder="项目名称">
+                        <option value="世居项目1">世居项目1</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <!--客户名称-->
+        <div class="form-horizontal col-sm-4">
+            <div class="form-group form-group-sm">
+                <label class="col-sm-2 control-label text-red">客户名称</label>
+                <div class="col-sm-7">
+                    <input id="name" class="form-control" placeholder="客户名称">
+                </div>
+                <div class="col-sm-3">
+                    <select id="sex" class="form-control">
+                        <option value="男">男</option>
+                        <option value="女">女</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <!--手机号码-->
+        <div class="form-horizontal col-sm-4">
+            <div class="form-group form-group-sm">
+                <label class="col-sm-2 control-label text-red">手机号码</label>
+                <div class="col-sm-10">
+                    <input id="telephone" type="tel" class="form-control" placeholder="手机号码">
+                </div>
+            </div>
+        </div>
+        <!--电话号码-->
+        <div class="form-horizontal col-sm-4">
+            <div class="form-group form-group-sm">
+                <label class="col-sm-2 control-label text-red">电话号码</label>
+                <div class="col-sm-10">
+                    <input id="phone" type="tel" class="form-control" placeholder="电话号码">
+                </div>
+            </div>
+        </div>
+        <!--邮箱地址-->
+        <div class="form-horizontal col-sm-4">
+            <div class="form-group form-group-sm">
+                <label class="col-sm-2 control-label">邮箱地址</label>
+                <div class="col-sm-10">
+                    <input id="email" type="email" class="form-control" placeholder="邮箱地址">
+                </div>
+            </div>
+        </div>
+        <!--认知途径-->
+        <div class="form-horizontal col-sm-4">
+            <div class="form-group form-group-sm">
+                <label class="col-sm-2 control-label text-red">认知途径</label>
+                <div class="col-sm-10">
+                    <select id="pathway" class="form-control">
+                        <option value="中介带客">中介带客</option>
+                        <option value="房联宝">房联宝</option>
+                        <option value="户外广告">户外广告</option>
+                        <option value="网络/电视/电台广告">网络/电视/电台广告</option>
+                        <option value="纸媒">纸媒</option>
+                        <option value="CALL客">CALL客</option>
+                        <option value="短信">短信</option>
+                        <option value="老带新/友介">老带新/友介</option>
+                        <option value="灯光条/楼体条幅">灯光条/楼体条幅</option>
+                        <option value="地铁/公交站台">地铁/公交站台</option>
+                        <option value="外拓">外拓</option>
+                        <option value="企拓">企拓</option>
+                        <option value="围挡">围挡</option>
+                        <option value="其他">其他</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <!--证件类型-->
+        <div class="form-horizontal col-sm-4">
+            <div class="form-group form-group-sm">
+                <label class="col-sm-2 control-label">证件类型</label>
+                <div class="col-sm-10">
+                    <select id="carttype" class="form-control">
+                        <option value="身份证">身份证</option>
+                        <option value="护照">护照</option>
+                        <option value="返乡证">返乡证</option>
+                        <option value="港澳通行证">港澳通行证</option>
+                        <option value="其他">其他</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <!--证件号码-->
+        <div class="form-horizontal col-sm-4">
+            <div class="form-group form-group-sm">
+                <label class="col-sm-2 control-label">证件号码</label>
+                <div class="col-sm-10">
+                    <input id="cartnumber" class="form-control" placeholder="证件号码">
+                </div>
+            </div>
+        </div>
+        <!--生日年龄-->
+        <div class="form-horizontal col-sm-4">
+            <div class="form-group form-group-sm">
+                <label class="col-sm-2 control-label">生日年龄</label>
+                <div class="col-sm-10">
+                    <select id="age" class="form-control">
+                        <option value=""></option>
+                        <option value="20岁以下">20岁以下</option>
+                        <option value="20-30岁">20-30岁</option>
+                        <option value="30-35岁">30-35岁</option>
+                        <option value="35-40岁">35-40岁</option>
+                        <option value="40-50岁">40-50岁</option>
+                        <option value="50-60岁">50-60岁</option>
+                        <option value="60以上">60以上</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <!--行业类型-->
+        <div class="form-horizontal col-sm-4">
+            <div class="form-group form-group-sm">
+                <label class="col-sm-2 control-label">行业类型</label>
+                <div class="col-sm-10">
+                    <select id="business" class="form-control">
+                        <option value=""></option>
+                        <option value="电子">电子</option>
+                        <option value="贸易">贸易</option>
+                        <option value="实业">实业</option>
+                        <option value="金融">金融</option>
+                        <option value="IT">IT</option>
+                        <option value="房地产">房地产</option>
+                        <option value="高科技">高科技</option>
+                        <option value="通讯">通讯</option>
+                        <option value="物流">物流</option>
+                        <option value="传媒">传媒</option>
+                        <option value="建筑设计">建筑设计</option>
+                        <option value="服务业">服务业</option>
+                        <option value="教育">教育</option>
+                        <option value="政府">政府</option>
+                        <option value="能源">能源</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <!--职务-->
+        <div class="form-horizontal col-sm-4">
+            <div class="form-group form-group-sm">
+                <label class="col-sm-2 control-label">职务</label>
+                <div class="col-sm-10">
+                    <select id="job" class="form-control">
+                        <option value=""></option>
+                        <option value="企业主">企业主</option>
+                        <option value="董事/总经理">董事/总经理</option>
+                        <option value="高层管理">高层管理</option>
+                        <option value="中层管理">中层管理</option>
+                        <option value="基层管理">基层管理</option>
+                        <option value="专业技术人员">专业技术人员</option>
+                        <option value="一般职员">一般职员</option>
+                        <option value="自由职业">自由职业</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <!--最后跟进-->
+        <div class="form-horizontal col-sm-4">
+            <div class="form-group form-group-sm">
+                <label class="col-sm-2 control-label">最后跟进</label>
+                <div class="col-sm-10">
+                    <input id="lastfollow" type="date" class="form-control" placeholder="最后跟进时间" disabled>
+                </div>
+            </div>
+        </div>
+        <!--到访时间-->
+        <div class="form-horizontal col-sm-4">
+            <div class="form-group form-group-sm">
+                <label class="col-sm-2 control-label">到访时间</label>
+                <div class="col-sm-10">
+                    <input id="visitdate" type="date" class="form-control" placeholder="到访日期">
+                </div>
+            </div>
+        </div>
+        <!--客户类型-->
+        <div class="form-horizontal col-sm-4">
+            <div class="form-group form-group-sm">
+                <label class="col-sm-2 control-label">客户类型</label>
+                <div class="col-sm-10">
+                    <select id="type" class="form-control">
+                        <option value="来访">来访</option>
+                        <option value="来电">来电</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <!--电转访-->
+        <div class="form-horizontal col-sm-4">
+            <div class="form-group form-group-sm">
+                <label class="col-sm-2 control-label">电转访</label>
+                <div class="col-sm-10">
+                    <input id="teltovisited" class="switch" type="checkbox">
+                </div>
+            </div>
+        </div>
+        <!--业务员-->
+        <div class="form-horizontal col-sm-4">
+            <div class="form-group form-group-sm">
+                <label class="col-sm-2 control-label">业务员</label>
+                <div class="col-sm-10">
+                    <input id="salesman" class="form-control" placeholder="业务员" disabled value="test">
+                </div>
+            </div>
+        </div>
+        <legend></legend>
+        <!--客户地址-->
+        <div class="form-horizontal col-sm-6">
+            <div class="form-group form-group-sm">
+                <label class="col-sm-2 control-label text-red">客户地址</label>
+                <div class="col-sm-10">
+                    <input id="address" class="form-control" placeholder="客户地址">
+                </div>
+            </div>
+        </div>
+        <!--详细地址-->
+        <div class="form-horizontal col-sm-6">
+            <div class="form-group form-group-sm">
+                <label class="col-sm-2 control-label">详细地址</label>
+                <div class="col-sm-10">
+                    <input id="addressdetail" class="form-control" placeholder="详细地址">
+                </div>
+            </div>
+        </div>
+        <legend></legend>
+        <div id="part1">
+            <!--投资需求-->
+            <div class="form-horizontal col-sm-4">
+                <div class="form-group form-group-sm">
+                    <label class="col-sm-2 control-label">投资需求</label>
+                    <div class="col-sm-10">
+                        <select id="investmentdemand" class="form-control">
+                            <option value=""></option>
+                            <option value="有">有</option>
+                            <option value="无">无</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <!--投资意向-->
+            <div class="form-horizontal col-sm-4">
+                <div class="form-group form-group-sm">
+                    <label class="col-sm-2 control-label">投资意向</label>
+                    <div class="col-sm-10">
+                        <select id="investmentintention" multiple class="form-control select2">
+                            <option value="公寓">公寓</option>
+                            <option value="住宅">住宅</option>
+                            <option value="写字楼">写字楼</option>
+                            <option value="商铺">商铺</option>
+                            <option value="不限或其他">不限或其他</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <!--投资预算-->
+            <div class="form-horizontal col-sm-4">
+                <div class="form-group form-group-sm">
+                    <label class="col-sm-2 control-label">投资预算</label>
+                    <div class="col-sm-10">
+                        <select id="investmentbudget" class="form-control">
+                            <option value=""></option>
+                            <option value="100万以内">100万以内</option>
+                            <option value="100-200万">100-200万</option>
+                            <option value="200-300万">200-300万</option>
+                            <option value="300-500万">300-500万</option>
+                            <option value="500-1000万">500-1000万</option>
+                            <option value="1000-2000万">1000-2000万</option>
+                            <option value="2000-3000万">2000-3000万</option>
+                            <option value="3000-5000万">3000-5000万</option>
+                            <option value="5000万以上">5000万以上</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <!--其他意向-->
+            <div class="form-horizontal col-sm-4">
+                <div class="form-group form-group-sm">
+                    <label class="col-sm-2 control-label">其他意向</label>
+                    <div class="col-sm-10">
+                        <select id="otherintentestate" class="form-control">
+                            <option value=""></option>
+                            <option value="有">有</option>
+                            <option value="无">无</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <!--意向片区-->
+            <div class="form-horizontal col-sm-4">
+                <div class="form-group form-group-sm">
+                    <label class="col-sm-2 control-label">意向片区</label>
+                    <div class="col-sm-10">
+                        <input id="intentestate" class="form-control" placeholder="意向片区">
+                    </div>
+                </div>
+            </div>
+            <!--购房资格-->
+            <div class="form-horizontal col-sm-4">
+                <div class="form-group form-group-sm">
+                    <label class="col-sm-2 control-label">购房资格</label>
+                    <div class="col-sm-10">
+                        <select id="qualifications" class="form-control">
+                            <option value=""></option>
+                            <option value="1套">1套</option>
+                            <option value="2套">2套</option>
+                            <option value="3套">3套</option>
+                            <option value="3套以上">3套以上</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <!--金融需求-->
+            <div class="form-horizontal col-sm-4">
+                <div class="form-group form-group-sm">
+                    <label class="col-sm-2 control-label">金融需求</label>
+                    <div class="col-sm-10">
+                        <input id="financialdemand" class="switch" type="checkbox">
+                    </div>
+                </div>
+            </div>
+            <legend></legend>
+        </div>
+        <div id="part2">
+            <!--置业目的-->
+            <div class="form-horizontal col-sm-4">
+                <div class="form-group form-group-sm">
+                    <label class="col-sm-2 control-label">置业目的</label>
+                    <div class="col-sm-10">
+                        <select id="homepurpose" class="form-control">
+                            <option value=""></option>
+                            <option value="自住/自用">自住/自用</option>
+                            <option value="投资">投资</option>
+                            <option value="投资兼自住">投资兼自住</option>
+                            <option value="其它">其它</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <!--意向物业-->
+            <div class="form-horizontal col-sm-4">
+                <div class="form-group form-group-sm">
+                    <label class="col-sm-2 control-label">意向物业</label>
+                    <div class="col-sm-10">
+                        <input id="intenthome" class="form-control" placeholder="意向物业">
+                    </div>
+                </div>
+            </div>
+            <!--可接受价-->
+            <div class="form-horizontal col-sm-4">
+                <div class="form-group form-group-sm">
+                    <label class="col-sm-2 control-label">可接受价</label>
+                    <div class="col-sm-10">
+                        <div class="input-group">
+                            <input id="acceptprice" type="number" min="0" step="50" class="form-control"
+                                   placeholder="可接受总价">
+                            <span class="input-group-addon">万左右</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--意向等级-->
+            <div class="form-horizontal col-sm-4">
+                <div class="form-group form-group-sm">
+                    <label class="col-sm-2 control-label">意向等级</label>
+                    <div class="col-sm-10">
+                        <select id="intentlevel" class="form-control">
+                            <option value="A">A:对价格不敏感,有房票,贷款没问题,房号不限</option>
+                            <option value="B">B:价格合适才买,有房票,二次贷款,有房号限制,有对比盘</option>
+                            <option value="C">C:价格接受度低,区域不太认可,贷款有风险,对项目关注度不高</option>
+                            <option value="D">D:只是随便看看,可买可不买</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <!--项目抗性-->
+            <div class="form-horizontal col-sm-4">
+                <div class="form-group form-group-sm">
+                    <label class="col-sm-2 control-label">项目抗性</label>
+                    <div class="col-sm-10">
+                        <select id="resistance" class="form-control">
+                            <option value="地区偏远">地区偏远</option>
+                            <option value="户型不合理">户型不合理</option>
+                            <option value="价格波动大">价格波动大</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <!--项目认可-->
+            <div class="form-horizontal col-sm-4">
+                <div class="form-group form-group-sm">
+                    <label class="col-sm-2 control-label">项目认可</label>
+                    <div class="col-sm-10">
+                        <select id="approvalpoint" class="form-control">
+                            <option value="价格优惠">价格优惠</option>
+                            <option value="新城核心">新城核心</option>
+                            <option value="名校配置">名校配置</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <legend></legend>
+        </div>
+        <!--是否机构客户-->
+        <div class="form-horizontal col-sm-6">
+            <div class="form-group form-group-sm">
+                <label class="col-sm-6 control-label">是否机构客户</label>
+                <div class="col-sm-6">
+                    <input id="institutional" class="switch" type="checkbox">
+                </div>
+            </div>
+        </div>
+        <!--是否租赁客户-->
+        <div class="form-horizontal col-sm-6">
+            <div class="form-group form-group-sm">
+                <label class="col-sm-6 control-label">是否租赁客户</label>
+                <div class="col-sm-6">
+                    <input id="leasing" class="switch" type="checkbox">
+                </div>
+            </div>
+        </div>
+        <legend></legend>
+        <div id="part3">
+            <!--过往贷款-->
+            <div class="form-horizontal col-sm-4">
+                <div class="form-group form-group-sm">
+                    <label class="col-sm-2 control-label">过往贷款</label>
+                    <div class="col-sm-10">
+                        <select id="pastloan" class="form-control">
+                            <option value=""></option>
+                            <option value="1套">1套</option>
+                            <option value="2套">2套</option>
+                            <option value="3套">3套</option>
+                            <option value="3套以上">3套以上</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <!--投资经历-->
+            <div class="form-horizontal col-sm-4">
+                <div class="form-group form-group-sm">
+                    <label class="col-sm-2 control-label">投资经历</label>
+                    <div class="col-sm-10">
+                        <select id="experience" multiple class="form-control select2">
+                            <option value="写字楼物业投资">写字楼物业投资</option>
+                            <option value="商业投资">商业投资</option>
+                            <option value="金融产品投资">金融产品投资</option>
+                            <option value="其他投资">其他投资</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <!--持有物业-->
+            <div class="form-horizontal col-sm-4">
+                <div class="form-group form-group-sm">
+                    <label class="col-sm-2 control-label">持有物业</label>
+                    <div class="col-sm-10">
+                        <select id="holding" class="form-control">
+                            <option value=""></option>
+                            <option value="1套">1套</option>
+                            <option value="2套">2套</option>
+                            <option value="3套">3套</option>
+                            <option value="3套以上">3套以上</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <!--驱动因素-->
+            <div class="form-horizontal col-sm-4">
+                <div class="form-group form-group-sm">
+                    <label class="col-sm-2 control-label">驱动因素</label>
+                    <div class="col-sm-10">
+                        <select id="driving" class="form-control">
+                            <option value=""></option>
+                            <option value="1、原来租房,想拥有自己的房子">1、原来租房,想拥有自己的房子</option>
+                            <option value="2、想和父母分开住,拥有独立的空间">2、想和父母分开住,拥有独立的空间</option>
+                            <option value="3、准备婚房">3、准备婚房</option>
+                            <option value="4、为小孩成长教育">4、为小孩成长教育</option>
+                            <option value="5、想就近工作">5、想就近工作</option>
+                            <option value="6、想拥有好的环境,配套,方便居家">6、想拥有好的环境,配套,方便居家</option>
+                            <option value="7、原来面积太小,改善住房">7、原来面积太小,改善住房</option>
+                            <option value="8、值得投资,拥有较大的增值空间">8、值得投资,拥有较大的增值空间</option>
+                            <option value="9、随亲戚购买">9、随亲戚购买</option>
+                            <option value="10、为子女后代购房">10、为子女后代购房</option>
+                            <option value="11、为父母养老">11、为父母养老</option>
+                            <option value="12、提高居住档次,提升地位">12、提高居住档次,提升地位</option>
+                            <option value="13、其它因素">13、其它因素</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <!--客户回访-->
+            <div class="form-horizontal col-sm-4">
+                <div class="form-group form-group-sm">
+                    <label class="col-sm-2 control-label">客户回访</label>
+                    <div class="col-sm-10">
+                        <input id="review" class="form-control" placeholder="客户回访">
+                    </div>
+                </div>
+            </div>
+            <!--家庭情况-->
+            <div class="form-horizontal col-sm-4">
+                <div class="form-group form-group-sm">
+                    <label class="col-sm-2 control-label">家庭情况</label>
+                    <div class="col-sm-10">
+                        <select id="family" class="form-control">
+                            <option value=""></option>
+                            <option value="单身">单身</option>
+                            <option value="两口之家">两口之家</option>
+                            <option value="三口之家">三口之家</option>
+                            <option value="四口之家">四口之家</option>
+                            <option value="三代同堂">三代同堂</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <!--私家车价-->
+            <div class="form-horizontal col-sm-4">
+                <div class="form-group form-group-sm">
+                    <label class="col-sm-2 control-label">私家车价</label>
+                    <div class="col-sm-10">
+                        <select id="carprice" class="form-control">
+                            <option value=""></option>
+                            <option value="无">无</option>
+                            <option value="10W以下">10W以下</option>
+                            <option value="10-30W">10-30W</option>
+                            <option value="30-50W">30-50W</option>
+                            <option value="50-100W">50-100W</option>
+                            <option value="价位100W以">价位100W以上</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <!--客户归属-->
+            <div class="form-horizontal col-sm-4">
+                <div class="form-group form-group-sm">
+                    <label class="col-sm-2 control-label">客户归属</label>
+                    <div class="col-sm-10">
+                        <input id="ownership" class="form-control" placeholder="客户归属" value="私客" disabled>
+                    </div>
+                </div>
+            </div>
+            <!--整体资金-->
+            <div class="form-horizontal col-sm-4">
+                <div class="form-group form-group-sm">
+                    <label class="col-sm-2 control-label">整体资金</label>
+                    <div class="col-sm-10">
+                        <input id="financialstrength" class="form-control" placeholder="整体资金实力">
+                    </div>
+                </div>
+            </div>
+            <!--微信账号-->
+            <div class="form-horizontal col-sm-4">
+                <div class="form-group form-group-sm">
+                    <label class="col-sm-2 control-label">微信账号</label>
+                    <div class="col-sm-10">
+                        <input id="WeChat" class="form-control" placeholder="微信账号">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <legend></legend>
+        <div id="part4"  style="display: none">
+            <!--公司名称-->
+            <div class="form-horizontal col-sm-4">
+                <div class="form-group form-group-sm">
+                    <label class="col-sm-2 control-label">公司名称</label>
+                    <div class="col-sm-10">
+                        <input id="companyname" class="form-control" placeholder="公司名称">
+                    </div>
+                </div>
+            </div>
+            <!--机构编码-->
+            <div class="form-horizontal col-sm-4">
+                <div class="form-group form-group-sm">
+                    <label class="col-sm-2 control-label">机构编码</label>
+                    <div class="col-sm-10">
+                        <input id="coding" class="form-control" placeholder="机构编码">
+                    </div>
+                </div>
+            </div>
+            <!--所有制-->
+            <div class="form-horizontal col-sm-4">
+                <div class="form-group form-group-sm">
+                    <label class="col-sm-2 control-label">所有制</label>
+                    <div class="col-sm-10">
+                        <select id="ownershipform" class="form-control">
+                            <option value=""></option>
+                            <option value="合资企业">合资企业</option>
+                            <option value="国有企业">国有企业</option>
+                            <option value="民营企业">民营企业</option>
+                            <option value="外资企业">外资企业</option>
+                            <option value="其他">其他</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <!--注册资金-->
+            <div class="form-horizontal col-sm-4">
+                <div class="form-group form-group-sm">
+                    <label class="col-sm-2 control-label">注册资金</label>
+                    <div class="col-sm-10">
+                        <select id="registeredprice" class="form-control">
+                            <option value=""></option>
+                            <option value="50万以下">50万以下</option>
+                            <option value="50-100万">50-100万</option>
+                            <option value="100-200万">100-200万</option>
+                            <option value="200-500万">200-500万</option>
+                            <option value="500-1000万">500-1000万</option>
+                            <option value="1000-5000万">1000-5000万</option>
+                            <option value="5000万以上">5000万以上</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <!--员工数量-->
+            <div class="form-horizontal col-sm-4">
+                <div class="form-group form-group-sm">
+                    <label class="col-sm-2 control-label">员工数量</label>
+                    <div class="col-sm-10">
+                        <select id="employeesnumber" class="form-control">
+                            <option value=""></option>
+                            <option value="50人以下">50人以下</option>
+                            <option value="50-100人">50-100人</option>
+                            <option value="100-200人">100-200人</option>
+                            <option value="200-500人">200-500人</option>
+                            <option value="500-1000人">500-1000人</option>
+                            <option value="1000-5000人">1000-5000人</option>
+                            <option value="5000人以上">5000人以上</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <!--物业状况-->
+            <div class="form-horizontal col-sm-4">
+                <div class="form-group form-group-sm">
+                    <label class="col-sm-2 control-label">物业状况</label>
+                    <div class="col-sm-10">
+                        <select id="usestatus" class="form-control">
+                            <option value=""></option>
+                            <option value="租赁">租赁</option>
+                            <option value="购买">购买</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <!--关注因素-->
+            <div class="form-horizontal col-sm-4">
+                <div class="form-group form-group-sm">
+                    <label class="col-sm-2 control-label">关注因素</label>
+                    <div class="col-sm-10">
+                        <select id="concernfactor" multiple class="form-control select2">
+                            <option value="品质">品质</option>
+                            <option value="交通">交通</option>
+                            <option value="回报率">回报率</option>
+                            <option value="配套">配套</option>
+                            <option value="升值潜力">升值潜力</option>
+                            <option value="价格">价格</option>
+                            <option value="运营成本">运营成本</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <!--办公面积-->
+            <div class="form-horizontal col-sm-4">
+                <div class="form-group form-group-sm">
+                    <label class="col-sm-2 control-label">办公面积</label>
+                    <div class="col-sm-10">
+                        <select id="officespace" class="form-control">
+                            <option value=""></option>
+                            <option value="150㎡以下">150㎡以下</option>
+                            <option value="150㎡-300㎡">150㎡-300㎡</option>
+                            <option value="300㎡-500㎡">300㎡-500㎡</option>
+                            <option value="500㎡-800㎡">500㎡-800㎡</option>
+                            <option value="800㎡-1000㎡">800㎡-1000㎡</option>
+                            <option value="1000㎡-1500㎡">1000㎡-1500㎡</option>
+                            <option value="1500㎡以上">1500㎡以上</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <!--成立时间-->
+            <div class="form-horizontal col-sm-4">
+                <div class="form-group form-group-sm">
+                    <label class="col-sm-2 control-label">成立时间</label>
+                    <div class="col-sm-10">
+                        <input id="establishmenttime" type="date" class="form-control" placeholder="成立时间">
+                    </div>
+                </div>
+            </div>
+            <!--是否上市-->
+            <div class="form-horizontal col-sm-4">
+                <div class="form-group form-group-sm">
+                    <label class="col-sm-2 control-label">是否上市</label>
+                    <div class="col-sm-10">
+                        <input id="islist" class="switch" type="checkbox">
+                    </div>
+                </div>
+            </div>
+            <!--驱动因素-->
+            <div class="form-horizontal col-sm-4">
+                <div class="form-group form-group-sm">
+                    <label class="col-sm-2 control-label">驱动因素</label>
+                    <div class="col-sm-10">
+                        <select id="drivingfactors" multiple class="form-control select2">
+                            <option value="新成立/设分公司或办事处">新成立/设分公司或办事处</option>
+                            <option value="拓展市场">拓展市场</option>
+                            <option value="租赁到期">租赁到期</option>
+                            <option value="提升形象">提升形象</option>
+                            <option value="规模扩张">规模扩张</option>
+                            <option value="节约成本">节约成本</option>
+                            <option value="配套齐全">配套齐全</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <!--需求面积-->
+            <div class="form-horizontal col-sm-4">
+                <div class="form-group form-group-sm">
+                    <label class="col-sm-2 control-label">需求面积</label>
+                    <div class="col-sm-10">
+                        <div class="input-group">
+                            <input id="demandarea1" type="number" min="0" step="50" class="form-control"
+                                   placeholder="需求面积">
+                            <span class="input-group-addon">㎡</span>
+                            <span class="input-group-addon">~</span>
+                            <input id="demandarea2" type="number" min="0" step="50" class="form-control"
+                                   placeholder="需求面积">
+                            <span class="input-group-addon">㎡</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--需求单价-->
+            <div class="form-horizontal col-sm-4">
+                <div class="form-group form-group-sm">
+                    <label class="col-sm-2 control-label">需求单价</label>
+                    <div class="col-sm-10">
+                        <div class="input-group">
+                            <input id="demandunitprice1" type="number" min="0" step="50" class="form-control"
+                                   placeholder="需求单价">
+                            <span class="input-group-addon">元</span>
+                            <span class="input-group-addon">~</span>
+                            <input id="demandunitprice2" type="number" min="0" step="50" class="form-control"
+                                   placeholder="需求单价">
+                            <span class="input-group-addon">元</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <legend></legend>
+        </div>
+        <div id="part5">
+            <!--备注-->
+            <div class="form-horizontal col-sm-8">
+                <div class="form-group form-group-sm">
+                    <label class="col-sm-1 control-label">备注</label>
+                    <div class="col-sm-10">
+                        <textarea id="remark" class="form-control" rows="2"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var url = "";
+    var action = "";//获取当前页面作用[add|edit]
+
+    $(function () {
+        init();
+    });
+
+    function init() {
+        $('.select2').select2({allowClear: true,});
+
+        $('.switch').bootstrapSwitch({
+            onText: "是",
+            offText: "否",
+            onColor: "success",
+            offColor: "info",
+            size: "small",
+            onSwitchChange: function (event, state) {
+                if (state == true) {
+                    $(this).val(true);
+                } else {
+                    $(this).val(false);
+                }
+                partChange($(this).attr('id'));
+            }
+        });
+
+        //region action
+        action = "{$action}";
+        if (action == "add") {
+            url = "__URL__/addAction";
+            $("#box_title").html("客户新增");
+            $('#visitdate').val(getCurrentDate());//到访时间
+            $('#lastfollow').val(getCurrentDate());//到访时间
+        } else if (action == "edit") {
+            url = "__URL__/editAction";
+            $("#box_title").html("客户详情");
+            getCustomerData();
+        }
+        //endregion
+
+
+    }
+
+    /**
+     * Part视图改变
+     */
+    function partChange(id) {
+        if (id == "institutional" || id == "leasing") {
+            if ($("#institutional").val() == "true") {
+                $("#part1").show();
+                $("#part2").show();
+                $("#part3").hide();
+                $("#part4").show();
+                $("#part5").show();
+            } else {
+                $("#part1").show();
+                $("#part2").show();
+                $("#part3").show();
+                $("#part4").hide();
+                $("#part5").show();
+            }
+
+            if ($("#leasing").val() == "true") {
+                if ($("#institutional").val() !== "true") {
+                    $("#part1").hide();
+                    $("#part2").hide();
+                    $("#part3").hide();
+                    $("#part4").hide();
+                    $("#part5").hide();
+                }
+            }
+        }
+    }
+
+    /**
+     * 获取用户信息
+     */
+    function getCustomerData() {
+        zeroModal.loading(2);
+        $.post("__URL__/getCustomerDataById", {id: "{$id}"}, function (result) {
+            zeroModal.closeAll();
+            if (result.status == "1") {
+                updateForm(result.data);
+            } else {
+                swal({
+                    title: "获取用户信息失败",
+                    text: "将自动跳转到上一页",
+                    timer: 1000,
+                    showConfirmButton: false
+                }, function () {
+                    window.history.go(-1);
+//                    window.location.href = "{:U('Home/SaleScene/Customer/index')}";
+                });
+            }
+        });
+    }
+
+    /**
+     * 更新FORM
+     */
+    function updateForm(info) {
+        $.each(info, function (index, domEle) {
+            $("#" + index).val(domEle);
+        });
+        $("#demandunitprice1").val(info["demandunitprice"].split("-")[0]);
+        $("#demandunitprice2").val(info["demandunitprice"].split("-")[1]);
+
+        $("#demandarea1").val(info["demandarea"].split("-")[0]);
+        $("#demandarea2").val(info["demandarea"].split("-")[1]);
+
+        $('#institutional').bootstrapSwitch('toggleState');
+        $('#leasing').bootstrapSwitch('toggleState');
+        $('#institutional').bootstrapSwitch('state', String2Boolean(info["institutional"]));
+        $('#leasing').bootstrapSwitch('state', String2Boolean(info["leasing"]));
+        $('#financialdemand').bootstrapSwitch('state', String2Boolean(info["financialdemand"]));
+        $('#islist').bootstrapSwitch('state', String2Boolean(info["islist"]));
+        $('#teltovisited').bootstrapSwitch('state', String2Boolean(info["teltovisited"]));
+
+        $("#investmentintention").select2("val", info["investmentintention"]);
+        $("#experience").select2("val", info["experience"]);
+        $("#concernfactor").select2("val", info["concernfactor"]);
+        $("#drivingfactors").select2("val", info["drivingfactors"]);
+
+        partChange();
+    }
+
+    /**
+     * 添加|保存客户
+     */
+    function saveCustomer() {
+        var requiredCols = {
+            "项目名称": "project",
+            "客户名称": "name",
+            "性别": "sex",
+            "手机": "telephone",
+            "电话": "phone",
+            "认知途径": "pathway",
+            "到访时间": "visitdate",
+            "业务员": "salesman",
+            "客户地址": "address",
+            "投资需求": "investmentdemand",
+            "其他意向楼盘": "otherintentestate",
+            "置业目的": "homepurpose",
+            "意向物业": "intenthome",
+            "意向等级": "intentlevel"
+        };
+
+        //region experience:4;demandunitprice:2;demandarea:2
+//        var experience = "";
+//        if ($('#experience1').is(':checked')) {
+//            experience += $('#experience1').val() + ";";
+//        }
+//        if ($('#experience2').is(':checked')) {
+//            experience += $('#experience2').val() + ";";
+//        }
+//        if ($('#experience3').is(':checked')) {
+//            experience += $('#experience3').val() + ";";
+//        }
+//        if ($('#experience4').is(':checked')) {
+//            experience += $('#experience4').val() + ";";
+//        }
+
+        var demandunitprice = $("#demandunitprice1").val() + "-" + $("#demandunitprice2").val();
+        var demandarea = $("#demandarea1").val() + "-" + $("#demandarea2").val();
+        //endregion
+        var saveData = {
+            project: $("#project").val(),
+            name: $("#name").val(),
+            sex: $("#sex").val(),
+            telephone: $("#telephone").val(),
+            phone: $("#phone").val(),
+            email: $("#email").val(),
+            pathway: $("#pathway").val(),
+            carttype: $("#carttype").val(),
+            cartnumber: $("#cartnumber").val(),
+            age: $("#age").val(),
+            business: $("#business").val(),
+            job: $("#job").val(),
+            lastfollow: $("#lastfollow").val(),
+            visitdate: $("#visitdate").val(),
+            type: $("#type").val(),
+            teltovisited: $("#teltovisited").val(),
+            salesman: $("#salesman").val(),
+            address: $("#address").val(),
+            addressdetail: $("#addressdetail").val(),
+            investmentdemand: $("#investmentdemand").val(),
+            investmentintention: $("#investmentintention").val(),
+            investmentbudget: $("#investmentbudget").val(),
+            otherintentestate: $("#otherintentestate").val(),
+            intentestate: $("#intentestate").val(),
+            qualifications: $("#qualifications").val(),
+            financialdemand: $("#financialdemand").val(),
+            homepurpose: $("#homepurpose").val(),
+            intenthome: $("#intenthome").val(),
+            acceptprice: $("#acceptprice").val(),
+            intentlevel: $("#intentlevel").val(),
+            resistance: $("#resistance").val(),
+            approvalpoint: $("#approvalpoint").val(),
+            institutional: $("#institutional").val(),
+            leasing: $("#leasing").val(),
+            pastloan: $("#pastloan").val(),
+            experience: $("#experience").val(),
+            holding: $("#holding").val(),
+            driving: $("#driving").val(),
+            review: $("#review").val(),
+            family: $("#family").val(),
+            carprice: $("#carprice").val(),
+            ownership: $("#ownership").val(),
+            financialstrength: $("#financialstrength").val(),
+            WeChat: $("#WeChat").val(),
+            companyname: $("#companyname").val(),
+            coding: $("#coding").val(),
+            ownershipform: $("#ownershipform").val(),
+            registeredprice: $("#registeredprice").val(),
+            employeesnumber: $("#employeesnumber").val(),
+            usestatus: $("#usestatus").val(),
+            concernfactor: $("#concernfactor").val(),
+            officespace: $("#officespace").val(),
+            establishmenttime: $("#establishmenttime").val(),
+            islist: $("#islist").val(),
+            drivingfactors: $("#drivingfactors").val(),
+            demandarea: demandarea,
+            demandunitprice: demandunitprice,
+            remark: $("#remark").val(),
+        }
+
+        if (action == "edit") {
+            saveData["id"] = $("#id").val();
+        }
+
+        //region 验证表单
+        var isRequiredWrited = true;
+        $.each(requiredCols, function (index, domEle) {
+            if (!saveData[domEle]) {
+                zeroModal.alert(index + " 不能为空");
+                $("#" + domEle).focus();
+                isRequiredWrited = false;
+                return false;
+            }
+        });
+        //endregion
+
+        if (isRequiredWrited) {
+            $.post(url, {data: saveData}, function (result) {
+                if (result.status == "1") {
+                    swal({
+                        title: "保存成功",
+                        text: "将自动跳转到客户列表",
+                        timer: 1000,
+                        showConfirmButton: false
+                    }, function () {
+//                        window.location.reload();
+                        window.location.href = "{:U('Home/SaleScene/Customer/index')}";
+                    });
+                } else {
+                    zeroModal.alert("保存失败，请稍后再试");
+                }
+            });
+        }
+    }
+
+
+</script>

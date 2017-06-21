@@ -1,0 +1,60 @@
+<layout name="MainLayout"/>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box-primary">
+            <div class="box-body box-profile">
+                <if condition="($userinfo.head_img eq null) OR ($userinfo.head_img eq '')">
+                    <img src="__PUBLIC__/lib/lte/dist/img/user2-160x160.jpg"
+                         class="profile-user-img img-responsive img-circle">
+                    <else/>
+
+                    <img src="__ROOT__/Data/Header/crop/{$userinfo.head_img}"
+                         class="profile-user-img img-responsive img-circle">
+                </if>
+                <h3 class="profile-username text-center">{$userinfo.name}</h3>
+                <p class="text-muted text-center">{$userinfo.email}</p>
+                <p class="text-center text-muted">
+                    <a href="__URL__/ModifyHeader" class="btn btn-warning btn-xs">修改图像</a>
+                </p>
+                <div class="col-md-offset-3 col-md-6">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">邮箱</label>
+                            <div class="col-sm-10">
+                                <input type="email" class="form-control" placeholder="邮箱" value="{$userinfo.email}"
+                                       disabled>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">姓名</label>
+                            <div class="col-sm-10">
+                                <input type="email" class="form-control" placeholder="姓名" value="{$userinfo.name}"
+                                       disabled>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">密码</label>
+                            <div class="col-sm-10">
+                                <div class="input-group">
+                                    <input type="password" class="form-control" value="thisiswrongpassword"
+                                           placeholder="密码" disabled>
+                                    <span class="input-group-btn">
+                                        <a class="btn btn-info" type="button" href="__URL__/ModifyPassword"><i
+                                                class="fa fa-edit"></i></a>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</div>
+</div>
+</form>
+</div>

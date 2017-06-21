@@ -1,0 +1,67 @@
+<layout name="MainLayout"/>
+
+<div class="box box-solid box-success">
+    <div class="box-header">
+        <span class="box-title">客户管理</span>
+    </div>
+    <div class="box-body">
+        <div class="col-md-12">
+            <div id="toolbar">
+                <div class="form-inline" role="form">
+                    <div class="form-group">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default" onclick="showAddModal()">
+                                <i class="fa fa-plus-square-o">新增</i>
+                            </button>
+                            <button type="button" class="btn btn-default" onclick="showEditModal()">
+                                <i class="fa fa-edit">修改</i>
+                            </button>
+                            <button type="button" class="btn btn-default" onclick="showDeleteAlert()">
+                                <i class="fa fa-trash-o">删除</i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <table id="table" data-search="true" data-pagination="true" data-show-toggle="false"></table>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(function () {
+        updateTable();
+    });
+
+    /**
+     * 获取数据
+     */
+    function getTableData() {
+        $.post("__URL__/UpdateEstimateTable", {date: date, type: type, title: title}, function (data) {
+            if (data.length > 0) {
+                updateTable(data);
+            }
+        });
+    }
+
+    /**
+     * 更新Table
+     */
+    function updateTable() {
+        var columns = [];
+        columns.push({title: "标题", field: "title", sortable: "true", align: "center", width: 200});
+        columns.push({title: "评价类型", field: "type", sortable: "true", align: "center", width: 100});
+        columns.push({title: "被评价对象", field: "evaluated_name", sortable: "true", align: "center", width: 100});
+        columns.push({title: "邀请评价人", field: "rater_name", align: "center", width: 100});
+        columns.push({title: "总评分", field: "score", sortable: "true", align: "center", width: 100});
+        columns.push({title: "评分表", align: "center", width: 100,
+            formatter: function (value, row) {
+                var url = "{:U('Home/Management/ShowEstimate')}" + "?id=" + row.id;
+                return "<a href=" + url + ">查看</a>"
+            }
+        });
+        $('#table').bootstrapTable({columns: columns, data: data, toolbar: "#toolbar"});
+    }
+
+</script>

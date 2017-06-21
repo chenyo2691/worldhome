@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title> 注册 | 世居地产ERP </title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="__PUBLIC__/lib/addons/bootstrap-3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/lib/lte/dist/css/font-awesome.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/lib/lte/dist/css/ionicons.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/lib/lte/dist/css/AdminLTE.min.css">
+    <!-- iCheck -->
+    <!--<link rel="stylesheet" href="__PUBLIC__/plugins/iCheck/square/blue.css">-->
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="__PUBLIC__/lib/lte/dist/js/html5shiv.min.js"></script>
+    <script src="__PUBLIC__/lib/lte/dist/js/respond.min.js"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" href="__PUBLIC__/lib/lte/plugins/iCheck/square/blue.css">
+
+
+    <style>
+        .register-box-body {
+            -moz-box-shadow: 0px 3px 25px #5E1111;
+            -webkit-box-shadow: 0px 3px 25px #5E1111;
+            box-shadow: 0px 3px 25px #5E1111;
+            border-radius: 27px;
+        }
+    </style>
+
+</head>
+<body class="hold-transition login-page" style="background-image: linear-gradient(0deg, #262727, #00B3AA);">
+
+<div class="register-box">
+    <div class="register-logo">
+        <a href="#">世居地产管理平台</a>
+    </div>
+
+    <div class="register-box-body">
+        <p class="login-box-msg">新用户注册</p>
+        <form id="registerForm" action="__URL__/registerAction" method="post">
+            <div class="form-group has-feedback">
+                <input name="name" type="text" class="form-control" placeholder="姓名" required>
+                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input name="email" type="email" class="form-control" placeholder="邮箱[用于登录]" required>
+                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input name="password1" type="password" class="form-control" placeholder="密码" required>
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input name="password2" type="password" class="form-control" placeholder="确认密码" required>
+                <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+            </div>
+            <div class="row">
+                <div class="col-xs-8">
+                    <div class="checkbox icheck">
+                        <label>
+                            <input name="agree" type="checkbox" required> 同意 <a href="#">协议</a>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <button type="submit" class="btn btn-primary btn-block btn-flat">注册</button>
+                </div>
+            </div>
+        </form>
+        <div class="social-auth-links text-center">
+            <!--<p>- OR -</p>-->
+            <!--<a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign up using Facebook</a>-->
+            <!--<a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign up using Google+</a>-->
+        </div>
+
+        <a href="__URL__/index" class="text-center">已有账户</a>
+    </div>
+</div>
+
+<script src="__PUBLIC__/lib/lte/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+<script src="__PUBLIC__/lib/addons/jquery.form.js"></script>
+<script src="__PUBLIC__/lib/addons/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="__PUBLIC__/lib/lte/plugins/iCheck/icheck.min.js"></script>
+
+<!--zeroModal-->
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/lib/addons/zeroModal/zeroModal.css"/>
+<script type="text/javascript" src="__PUBLIC__/lib/addons/zeroModal/zeroModal.min.js"></script>
+
+<!--sweetalert-->
+<link rel="stylesheet" href="__PUBLIC__/lib/addons/sweetalert/sweetalert.css">
+<script src="__PUBLIC__/lib/addons/sweetalert/sweetalert.min.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+        $('input').iCheck({
+            checkboxClass: 'icheckbox_square-blue',
+            radioClass: 'iradio_square-blue',
+            increaseArea: '20%' // optional
+        });
+    });
+
+    $(document).ready(function () {
+        $('#registerForm').on('submit', function (e) {
+            e.preventDefault(); // <-- important
+            zeroModal.loading(2);
+            $(this).ajaxSubmit({
+                data: {},
+                beforeSubmit: function (formData, jqForm, options) {
+                    var ps1 = formData[2].value;
+                    var ps2 = formData[3].value;
+                    if (ps1 !== ps2) {
+                        zeroModal.closeAll();
+                        zeroModal.error('两次密码不一致');
+                        return false;
+                    }
+                    return true;
+                },
+                success: function (result) {
+                    zeroModal.closeAll();
+                    if (result.status == 0) {
+                        zeroModal.error(result.msg);
+                    } else {
+                        swal({
+                            title: "注册成功",
+                            text: "将自动跳转到登录页面",
+                            timer: 1000,
+                            showConfirmButton: false
+                        }, function () {
+                            window.location.href = "{:U('Home/Common/Login')}";
+                        });
+                    }
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>
+
