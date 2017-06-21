@@ -36,7 +36,7 @@ class LoginController extends Controller
         $data = M('user')->where(array('email' => I('email')))->find();
         if ($data != null) {
             if ($data["status"] == 1) {
-                if ($data["password"] == I("password")) {
+                if ($data["password"] == md5(I('email') . I('password'))) {
                     session("userinfo", $data);
                     cookie("userinfo", $data, 7 * 24 * 3600);
 
@@ -81,7 +81,7 @@ class LoginController extends Controller
         } else {
             $saveData["name"] = $name;
             $saveData["email"] = $email;
-            $saveData["password"] = $password;
+            $saveData["password"] = md5($email . $password);
             $flag = M("user")->add($saveData);
             if ($flag) {
                 D("SystemRecord")->AddAPIRecord($email, $name, "注册用户");//Log

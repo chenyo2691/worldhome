@@ -10,6 +10,14 @@
 // +----------------------------------------------------------------------
 
 // 应用入口文件
+// 检测是否是新安装
+if(file_exists("./Public/install") && !file_exists("./Public/install/install.lock")){
+    // 组装安装url
+    $url=$_SERVER['HTTP_HOST'].trim($_SERVER['SCRIPT_NAME'],'index.php').'Public/install/index.php';
+    // 使用http://域名方式访问；避免./Public/install 路径方式的兼容性和其他出错问题
+    header("Location:http://$url");
+    die;
+}
 
 // 检测PHP环境
 if(version_compare(PHP_VERSION,'5.3.0','<'))  die('require PHP > 5.3.0 !');

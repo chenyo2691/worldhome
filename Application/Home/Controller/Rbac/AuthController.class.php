@@ -197,7 +197,7 @@ class AuthController extends BaseController
             if (D('User')->is_exist($data) == true) {
                 $this->error("用户已存在,无法重复添加");
             } else {
-                $data['password'] = $data['password'];
+                $data['password'] = $data['email'] . $data['password'];
                 $result = D('User')->addData($data);
                 if ($result) {
                     if (!empty($data['group_ids'])) {
@@ -237,7 +237,7 @@ class AuthController extends BaseController
     {
         if (IS_POST) {
             $data = I('post.');
-            $newpassword = $data['password'];
+            $newpassword = $data['email'] . $data['password'];
             // 组合where数组条件
             $uid = $data['id'];
             $map = array(
